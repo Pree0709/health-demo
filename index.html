@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>My Health Demo</title>
-  <button type="button" id="check-backend">Check backend</button>
-<p id="backend-status">Backend not checked yet.</p>
+</head>
 <body>
   <h1>My Health Demo</h1>
   <p>A practice app using fictional data only.</p>
@@ -17,4 +16,27 @@
   </form>
 
   <button type="button">Connect to test health plan</button>
+
+  <button type="button" id="check-backend">Check backend</button>
+  <p id="backend-status">Backend not checked yet.</p>
+
+  <script>
+    const checkButton = document.getElementById('check-backend');
+    const statusText = document.getElementById('backend-status');
+
+    checkButton.addEventListener('click', async () => {
+      statusText.textContent = 'Checking…';
+
+      try {
+        const response = await fetch('https://health-demoo.onrender.com/health');
+        if (!response.ok) throw new Error('Request failed');
+
+        const data = await response.json();
+        statusText.textContent = 'Backend replied: ' + data.status;
+      } catch (error) {
+        statusText.textContent = 'Could not reach the backend. Try again.';
+      }
+    });
+  </script>
 </body>
+</html>
