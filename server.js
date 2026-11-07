@@ -5,11 +5,10 @@ const port = process.env.PORT || 3000;
 const server = http.createServer((request, response) => {
   if (request.url === '/health') {
     response.setHeader(
-  'Access-Control-Allow-Origin',
-  'https://health-demo-ows9.onrender.com'
-);server.listen(port, '0.0.0.0', () => {
-  console.log(`Server listening on port ${port}`);
-});
+      'Access-Control-Allow-Origin',
+      'https://health-demo-ows9.onrender.com'
+    );
+
     response.writeHead(200, {
       'Content-Type': 'application/json'
     });
